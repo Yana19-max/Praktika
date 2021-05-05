@@ -1,0 +1,26 @@
+﻿@model Praktikaaa.ViewModels.LoginModel
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Авторизация";
+}
+
+
+
+<form class="form-signin" asp-action="Login" asp-controller="Account" asp-anti-forgery="true" style="width:350px; margin:150px auto">
+    <div class="text-center mb-4">
+        <h1 class="h3 mb-3 font-weight-normal">Авторизация</h1>
+    </div>
+    <div class="validation" asp-validation-summary="ModelOnly"></div>
+    <div class="form-label-group">
+        <input type="text" asp-for="Email" id="inputEmail" class="form-control myinput" placeholder="Логин" required autofocus>
+        <label asp-for="Email">Login</label>
+        <span asp-validation-for="Email" />
+    </div>
+    <div class="form-label-group">
+        <input type="password" asp-for="Password" id="inputPassword" class="form-control myinput" placeholder="Пароль" required>
+        <label asp-for="Password">Password</label>
+        <span asp-validation-for="Password" />
+    </div>
+    <button class="btn btn-lg btn-block" type="submit">Войти</button>
+</form>

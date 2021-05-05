@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Praktikaaa.Models.Messenger>
+    @{
+        Layout = "_Layout";
+        ViewData["Title"] = "Админпанель";
+    }
+
+    @{ if (ViewBag.Error != null)
+        {
+            <p>@ViewBag.Error</p>
+        }
+    }
+
+    <table class="table border-primary text-light">
+        <thead class="border-primary">
+            <tr>
+                <td scope="col">Порядковый номер</td>
+                <td scope="col">Имя</td>
+                <td scope="col">Фамилия</td>
+                <td scope="col">Email</td>
+                <td scope="col">Список заказа</td>
+                <td scope="col">Статус заявки</td>
+                <td scope="col"></td>
+                <td scope="col"></td>
+            </tr>
+        </thead>
+        <tbody class="border-primary">
+            @{
+                int i = 1;
+            }
+            @foreach (var messeng in Model)
+            {
+                <tr>
+                    <td scope="row">@i</td>
+                    <td>@messeng.Name</td>
+                    <td>@messeng.SurName</td>
+                    <td>@messeng.Email</td>
+                    <td>@messeng.Note</td>
+                    <td>@messeng.State</td>
+                    <td><a href="/Account/Editing/@messeng.Id" role="button" class="btn btn-sm">Редактировать</a></td>
+                <td><a href="/Account/Delete/@messeng.Id" role="button" class="btn btn-sm">Удалить</a></td>
+                </tr>
+                {
+                    i = i + 1;
+                }
+            }
+        </tbody>
+    </table>

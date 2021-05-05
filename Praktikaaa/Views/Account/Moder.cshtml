@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Praktikaaa.Models.User>
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Просмотр модераторов";
+}
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Добавление модератора</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/Account/AddModer" method="post">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col">
+                            <label for="validationDefault01">Login</label>
+                            <input id="validationDefault01" required type="text" class="form-control" name="Email" placeholder="Login">
+                        </div>
+                        <div class="col">
+                            <label for="validationDefault02">Password</label>
+                            <input id="validationDefault02" required type="text" class="form-control" name="Password" placeholder="Password">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button style="color:white" type="button" name="Role" value="User" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                    <button style="color:white" type="submit" class="btn btn-primary">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div style="width: 500px; margin:0 auto">
+    <table class="table border-primary">
+        <thead class="border-primary">
+            <tr>
+                <td scope="col">#</td>
+                <td scope="col">Email</td>
+                <td scope="col">Password</td>
+                <td scope="col"></td>
+            </tr>
+        </thead>
+        <tbody class="border-primary">
+            @{
+                int i = 1;
+            }
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td scope="row">@i</td>
+                    <td>@user.Email</td>
+                    <td>@user.Password</td>
+                    <td>
+                        @{if (user.Email != "Admin")
+                            {
+                                <a href="/Account/DeleteUser/@user.Id" role="button" class="btn btn-sm">Удалить модератора</a>
+                            }
+                            else
+                            { <p style="margin:0">Удаление запрещено</p> }
+                        }
+                    </td>
+                </tr>
+                {
+                    i = i + 1;
+                }
+            }
+        </tbody>
+    </table>
+    <button type="button" style="float:right" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Добавить модератора
+    </button>
+</div>
